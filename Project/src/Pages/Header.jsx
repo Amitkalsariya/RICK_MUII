@@ -7,39 +7,70 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import SearchIcon from '@mui/icons-material/Search';
+import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
+
 
 const Header = () => {
-    const pages = ['Home', 'Shop', 'Blogs','Pages','Contact'];
-    const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+    const pages = ['Home', 'Shop', 'Blogs', 'Pages', 'Contact'];
+    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
     const [anchorElNav, setAnchorElNav] = React.useState(null);
-    const [anchorElUser, setAnchorElUser] = React.useState(null);
-
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const isMenuOpen = Boolean(anchorEl);
+    const handleProfileMenuOpen = (event) => {
+        setAnchorEl(event.currentTarget);
+      };
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
     };
-    const handleOpenUserMenu = (event) => {
-        setAnchorElUser(event.currentTarget);
-    };
+    const handleMenuClose = () => {
+        setAnchorEl(null);
+        handleMobileMenuClose();
+      };
+      const handleMobileMenuClose = () => {
+        setMobileMoreAnchorEl(null);
+      };
+    
+    
+    
+    const menuId = 'primary-search-account-menu';
 
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
     };
 
-    const handleCloseUserMenu = () => {
-        setAnchorElUser(null);
-    };
+    const renderMenu = (
+        <Menu
+          anchorEl={anchorEl}
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          id={menuId}
+          keepMounted
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          open={isMenuOpen}
+          onClose={handleMenuClose}
+        >
+          <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+          <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+        </Menu>
+      );
     return (
         <div>
-            <AppBar position="static" sx={{background:'white',color:'black'}}>
+            <AppBar position="static" sx={{ background: 'white', color: 'black' }}>
                 <Container maxWidth="xl">
                     <Toolbar disableGutters>
-                      
+
                         <Typography
                             variant="h6"
                             noWrap
@@ -49,14 +80,14 @@ const Header = () => {
                                 mr: 2,
                                 display: { xs: 'none', md: 'flex' },
                                 fontFamily: '"Cereberi Sans",Roboto',
-                                fontWeight: 700,
-                                marginRight:'25px',
-                                fontSize:'35px',
+                                fontWeight: 800,
+                                marginRight: '35px',
+                                fontSize: '35px',
                                 letterSpacing: '.3rem',
                                 color: 'inherit',
                                 textDecoration: 'none',
-                                
-                                
+
+
                             }}
                         >
                             Supro
@@ -115,49 +146,78 @@ const Header = () => {
                                 textDecoration: 'none',
                             }}
                         >
-                           
+
                         </Typography>
                         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                             {pages.map((page) => (
                                 <Button
                                     key={page}
                                     onClick={handleCloseNavMenu}
-                                    sx={{ my: 2, color: 'black',textTransform:'capitalize',fontSize:'20px',     fontFamily: '"Cereberi Sans",Roboto',marginTop:'20px',marginRight:'7px',marginBottom:'20px','&:hover':{color:'#f68773'}}}
+                                    sx={{ my: 2, color: 'black', textTransform: 'capitalize', fontSize: '20px', fontFamily: '"Cereberi Sans",Roboto', marginTop: '20px', marginRight: '7px', marginBottom: '20px', '&:hover': { color: '#f68773' } }}
                                 >
                                     {page}
                                 </Button>
                             ))}
                         </Box>
+                      
+                        <IconButton
+    size="large"
+    edge="start"
+    color="inherit"
+    aria-label="open drawer"
+    sx={{ mr: 1 }} // Add margin to the right of the IconButton
+>
+    <SearchIcon />
+</IconButton>
+<IconButton
+    size="large"
+    edge="end"
+    aria-label="account of current user"
+    aria-controls={menuId}
+    aria-haspopup="true"
+    onClick={handleProfileMenuOpen}
+    color="inherit"
+    sx={{ marginLeft: '5px', marginRight: '5px' }}
+>
+    <PersonOutlineIcon />
+</IconButton>
+<IconButton
+    size="large"
+    edge="end"
+    aria-label="account of current user"
+    aria-controls={menuId}
+    aria-haspopup="true"
+    onClick={handleProfileMenuOpen}
+    color="inherit"
+    sx={{ marginLeft: '5px', marginRight: '5px' }}
+>
+    <FavoriteBorderIcon />
+</IconButton>
+<IconButton
+    size="large"
+    edge="end"
+    aria-label="account of current user"
+    aria-controls={menuId}
+    aria-haspopup="true"
+    onClick={handleProfileMenuOpen}
+    color="inherit"
+    sx={{ marginLeft: '5px', marginRight: '5px' }}
+>
+    <AddShoppingCartIcon />
+</IconButton>
+<IconButton
+    size="large"
+    edge="end"
+    aria-label="account of current user"
+    aria-controls={menuId}
+    aria-haspopup="true"
+    onClick={handleOpenNavMenu}
+    color="inherit"
+>
+    <MenuIcon />
+</IconButton>
+                       
 
-                        <Box sx={{ flexGrow: 0 }}>
-                            <Tooltip title="Open settings">
-                                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                    <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                                </IconButton>
-                            </Tooltip>
-                            <Menu
-                                sx={{ mt: '45px' }}
-                                id="menu-appbar"
-                                anchorEl={anchorElUser}
-                                anchorOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                keepMounted
-                                transformOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                open={Boolean(anchorElUser)}
-                                onClose={handleCloseUserMenu}
-                            >
-                                {settings.map((setting) => (
-                                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                        <Typography textAlign="center">{setting}</Typography>
-                                    </MenuItem>
-                                ))}
-                            </Menu>
-                        </Box>
                     </Toolbar>
                 </Container>
             </AppBar>
