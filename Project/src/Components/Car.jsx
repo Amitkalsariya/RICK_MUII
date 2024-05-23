@@ -7,14 +7,14 @@ const Car = () => {
         infinite: true,
         slidesToShow: 3,
         slidesToScroll: 1,
-        autoplay: true,
+        autoplay: false,
         speed: 2000,
         autoplaySpeed: 3000,
         cssEase: "linear"
       };
   return (
     <div>
-        <div className="slider-container">
+        <div className="slider-container mar">
       <Slider {...settings}>
         <div>
           <img src="https://supro.noudeveloper.com/uploads/small_2b_c3aa5954dd.jpg" alt="" />
@@ -30,9 +30,6 @@ const Car = () => {
         </div>
         <div>
           <img src="https://supro.noudeveloper.com/uploads/small_1b_8a96b4f17a.jpg" alt="" />
-        </div>
-        <div>
-        <img src="https://supro.noudeveloper.com/uploads/small_2b_c3aa5954dd.jpg" alt="" />
         </div>
       </Slider>
     </div>

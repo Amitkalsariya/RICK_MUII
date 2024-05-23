@@ -1,1 +1,22 @@
-
+*{
+    padding: 0;
+    margin: 0;
+}
+.mar{
+    margin-bottom: 100px;
+}
+.slick-next:before{
+    content: '→';
+    display: none;
+}
+.slick-next{
+    right: 0;
+    display: none;
+}
+.slick-prev:before{
+    content: '→';
+    display: none;
+}
+.slick-prev{
+    display: none;
+}
